@@ -55,8 +55,8 @@ $ cp .env.dist .env
 Edit the configuration options:
 
  * `forecast_username`: your forecast email address, eg. `forecast_username=some-email@example.com`
- * `forecast_password`: , your forecast password eg. `forecast_password=some-password`
- * `forecast_account_id`: , your forecast account id (found in your forecast url, https://forecastapp.com/`[FORECAST_ID]`/schedule/team) eg. `forecast_account_id=1234`
+ * `forecast_password`: your forecast password eg. `forecast_password=some-password`
+ * `forecast_account_id`: your forecast account id (found in your forecast url, https://forecastapp.com/`[FORECAST_ID]`/schedule/team) eg. `forecast_account_id=1234`
  * `forecast_insert_default_project_id`: id of the default project to use in the mass-insertion form. For instance, set it to a public holidays project, if you have one. eg. `forecast_insert_default_project_id=12345`
  * `harvest_client_domain`: your harvest subdomain (as found in your harvest url, https://[HARVEST_SUBDOMAIN].harvestapp.com/), eg. `harvest_client_domain=some-subdomain`
  * `harvest_client_id`: the `Client ID` of your OAuth client (create it at https://www.harvestapp.com/oauth2_clients), eg. `harvest_client_id=your-oauth-client-id`
