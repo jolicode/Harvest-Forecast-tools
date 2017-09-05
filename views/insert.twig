@@ -1,0 +1,119 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <h1>{{title}}</h1>
+
+    <form method="post" action="/insert" class="card">
+        {% if errors.global is defined %}
+            <div class="alert alert-danger invalid-feedback">
+                {{ errors.global }}
+            </div>
+        {% endif %}
+
+        <div class="form-group">
+            <label for="project">Project</label>
+            <select class="form-control{% if errors.project is defined %} is-invalid{% endif %}" name="project" required>
+                {% for project in projects %}
+                    <option value="{{ project.id }}"{% if values.project == project.id %} selected{% endif %}>
+                        {{ project.client_name }} - {{ project.name }}
+                    </option>
+                {% endfor %}
+            </select>
+            {% if errors.project is defined %}
+                <div class="invalid-feedback">
+                    {{ errors.project.msg }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="text" name="date" class="form-control date{% if errors.date is defined %} is-invalid{% endif %}" value="{{ values.date }}" />
+            {% if errors.date is defined %}
+                <div class="invalid-feedback">
+                    {{ errors.date.msg }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="duration">Duration</label>
+            <div class="input-group">
+                <input type="text" name="duration" class="form-control{% if errors.duration is defined %} is-invalid{% endif %}" aria-label="Hours amount" value="{{ values.duration }}" />
+                <span class="input-group-addon">h</span>
+            </div>
+            {% if errors.duration is defined %}
+                <div class="invalid-feedback">
+                    {{ errors.duration.msg }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <p>
+                Choose some people before inserting entries
+            </p>
+            {% for person in people %}
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="people[{{ person.id }}]"{% if values.people[person.id] == 'true' %} checked="checked"{% endif %} value="true" />
+                        {{ person.first_name }} {{ person.last_name }}
+                    </label>
+                </div>
+            {% endfor %}
+            {% if errors.people is defined %}
+                <div class="invalid-feedback">
+                    {{ errors.people.msg }}
+                </div>
+            {% endif %}
+            {% if errors.preexisting_assignement is defined %}
+                <div class="invalid-feedback">
+                    {{ errors.preexisting_assignement.msg }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <p>
+                Insert these items in...
+            </p>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input{% if errors.in is defined %} is-invalid{% endif %}" type="checkbox" name="in[forecast]"{% if values.in.forecast == 'true' %} checked="checked"{% endif %} value="true" />
+                    Forecast
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input{% if errors.in is defined %} is-invalid{% endif %}" type="checkbox" name="in[harvest]"{% if values.in.harvest == 'true' %} checked="checked"{% endif %} value="true" />
+                    Harvest
+                </label>
+            </div>
+            {% if errors.in is defined %}
+                <div class="invalid-feedback">
+                    {{ errors.in.msg }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="comment">Comment</label>
+            <textarea name="comment" class="form-control{% if errors.comment is defined %} is-invalid{% endif %}" rows="3">{{ values.comment }}</textarea>
+            {% if errors.comment is defined %}
+                <div class="invalid-feedback">
+                    {{ errors.comment.msg }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div>
+            <input class="button" type="submit" value="✏️&nbsp;&nbsp;insert" />
+        </div>
+    </form>
+
+    <script>
+    $(function() {
+        $('.date').datepicker();
+    });
+    </script>
+{% endblock %}

@@ -1,0 +1,220 @@
+* {
+  box-sizing: unset;
+}
+
+body {
+  margin: 8px;
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+a:hover {
+    color: #0084CC;
+    text-decoration: none;
+}
+
+header {
+  background-color: #eee;
+  font-size: 2em;
+  margin: -58px -58px 0 -58px;
+  padding: 20px 58px;
+}
+
+header a {
+  text-decoration: none;
+}
+
+h1 {
+  background-color: #f8f8f8;
+  font-size: 1.5em;
+  padding: 5px 58px;
+  margin: 0 -58px 20px -58px;
+}
+
+table {
+  border-collapse: separate;
+  font-size: 12px;
+  width: 100%;
+}
+
+table li {
+  list-style-type: none;
+}
+
+table ul {
+  margin: 0;
+  padding: 0;
+}
+
+th {
+  font-weight: bold;
+}
+
+th.day {
+  text-align: center;
+}
+
+th.people {
+  padding-right: 1em;
+  text-align: right;
+  width: 12em;
+}
+
+.assignement {
+  background-color: #efe;
+  border-bottom: 1px #ddd dotted;
+  height: 40px;
+  padding: 1px;
+  position: relative;
+  text-align: right;
+}
+.assignement:hover {
+  border: 1px dotted black;
+  margin: 0 0 1px 0;
+  padding: 0 0 1px 0;
+}
+
+.card {
+  background-color: #f8f8f8;
+  border-left: 5px #00b7ff solid;
+  padding: 5px 10px;
+}
+
+input.form-control {
+  width: calc(100% - 1.5rem);
+}
+
+.homepage p {
+  padding: 5px 0;
+}
+
+.homepage li {
+  list-style-type: none;
+}
+
+.homepage ul {
+  padding: 0;
+}
+
+a.button {
+  background-color: #f8f8f8;
+  border: 1px #00b7ff solid;
+  border-radius: 3px;
+  line-height: 44px;
+  padding: 10px;
+  text-decoration: none;
+}
+a.button:hover {
+  border: 1px #0084CC solid;
+}
+
+input.button {
+  background-color: #f8f8f8;
+  border: 1px #00b7ff solid;
+  border-radius: 3px;
+  color: #00B7FF;
+  line-height: 1.5em;
+  padding: 6px 10px 7px 10px;
+  text-decoration: none;
+}
+input.button:hover {
+  border: 1px #0084CC solid;
+  color: #0084CC;
+}
+
+.buttons {
+  float: right;
+  margin-top: -4px;
+}
+
+.buttons .button {
+  padding: 3px 10px;
+}
+
+.buttons .button:hover {
+  color: #f8f8f8;
+  padding: 3px 10px;
+  background-color: #00b7ff;
+  border: 1px #00b7ff solid;
+}
+
+.weekend {
+  background-color: #f0f0f0;
+}
+
+.error {
+  background-color: #ffcccc;
+}
+
+.half-error {
+  background-color: #fff4cc;
+}
+
+.assignement a {
+  display: inline-block;
+  height: 100%;
+  text-decoration: none;
+  width: 100%;
+}
+.assignement .tooltiptext {
+    visibility: hidden;
+    position: absolute;
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: left;
+    padding: 5px;
+    border-radius: 6px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity .5s;
+}
+.assignement .tooltip-bottom {
+    top: 135%;
+    left: 50%;
+    margin-left: -100px;
+}
+.assignement .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #555 transparent;
+}
+.assignement:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+i.forecast::after {
+    background-color: #f36c00;
+    background-image: linear-gradient(#f68a28, #f36c00);
+    content: "F";
+    display: inline-block;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    padding: 0 5px;
+    border-radius: 3px;
+}
+i.harvest::after {
+    background-color: #f36c00;
+    background-image: linear-gradient(#f68a28, #f36c00);
+    content: "H";
+    display: inline-block;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    padding: 0 5px;
+    border-radius: 3px;
+}
+.invalid-feedback {
+  display: block;
+}

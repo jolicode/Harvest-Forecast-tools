@@ -1,0 +1,32 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <p class="buttons">
+        <a href="/holidays/{{ prevStart }}/{{ prevEnd }}" class="button">←</a>&nbsp;<a href="/holidays/{{ nextStart }}/{{ nextEnd }}" class="button">→</a>
+    </p>
+    <h1>{{title}}</h1>
+
+    <h2>Harvest holidays report</h2>
+
+    <pre><code class="markdown">{% for user in holidays %}{% if user.harvestHolidays %}
+ * {{ user.first_name }} {{ user.last_name|upper }} :{% if user.harvestHolidays|length == 1 %} {% for name, days in user.harvestHolidays %} {{ days }} - {{ name }}{% endfor %}
+
+{% else %}
+
+{% for name, days in user.harvestHolidays %}
+   * {{ name }} : {{ days }}
+{% endfor %}{% endif %}{% endif %}{% endfor %}
+    </code></pre>
+
+    <h2>Forecast holidays report</h2>
+
+    <pre><code class="markdown">{% for user in holidays %}{% if user.forecastHolidays %}
+ * {{ user.first_name }} {{ user.last_name|upper }} :{% if user.forecastHolidays|length == 1 %} {% for name, days in user.forecastHolidays %} {{ days }} - {{ name }}{% endfor %}
+
+{% else %}
+
+{% for name, days in user.forecastHolidays %}
+   * {{ name }} : {{ days }}
+{% endfor %}{% endif %}{% endif %}{% endfor %}
+    </code></pre>
+{% endblock %}

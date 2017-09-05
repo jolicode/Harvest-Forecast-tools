@@ -1,0 +1,57 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <div class="homepage">
+        <h1>{{title}}</h1>
+
+        <p>
+            These tools allow to improve the use of Harvest and Forecast together.
+        </p>
+
+        <div class="card">
+            <p>
+                {% if harvestAuthorized %}
+                    ✅&nbsp;&nbsp;You have successfully authorized Harvest. (<a href="/auth/harvest/logout">logout</a>)
+                {% else %}
+                    🔓&nbsp;&nbsp;<a href="/auth/harvest/redirect" class="button">Authorize Harvest</a>
+                {% endif %}
+            </p>
+
+            <p>
+                {% if forecastAuthorized %}
+                    ✅&nbsp;&nbsp;You have successfully authorized Forecast. (<a href="/auth/forecast/logout">logout</a>)
+                {% else %}
+                    🔓&nbsp;&nbsp;<a href="/auth/forecast/token" class="button">Authorize Forecast</a>
+                {% endif %}
+            </p>
+
+            {% if harvestAuthorized and forecastAuthorized %}
+                <p>
+                    💥&nbsp;&nbsp;<a href="/clear-cache" class="button">Clear data cached from Harvest and Forecast</a>
+                </p>
+            {% endif %}
+        </div>
+
+        {% if harvestAuthorized and forecastAuthorized %}
+            <p>
+                Congrats! You unlocked the following features:
+            </p>
+
+            <ul>
+                <li>
+                    <a href="/diff" class="button">✨&nbsp;&nbsp;Compare Harvest timesheets and Forecast schedules</a>
+                </li>
+                <li>
+                    <a href="/holidays" class="button">🌴&nbsp;&nbsp;Generate a markdown-formatted holidays list</a>
+                </li>
+                <li>
+                    <a href="/insert" class="button">✏️&nbsp;&nbsp;Mass insert entries in forecast schedules &amp; Harvest timesheets</a>
+                </li>
+            </ul>
+        {% else %}
+            <p>
+                Before continuing, please fill the above authorizations
+            </p>
+        {% endif %}
+    </div>
+{% endblock %}

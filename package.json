@@ -1,0 +1,41 @@
+{
+  "name": "harvest-forecast-tools",
+  "license": "MIT",
+  "keywords": ["harvest", "forecast"],
+  "version": "0.0.1",
+  "scripts": {
+    "babel-node": "babel-node --presets=env",
+    "dev": "nodemon -e js,twig --exec yarn run babel-node -- ./bin/www",
+    "start": "yarn run babel-node -- ./bin/www"
+  },
+  "dependencies": {
+    "append-query": "^2.0.1",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "body-parser": "~1.17.1",
+    "connect-redis": "^3.3.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "dotenv": "^4.0.0",
+    "express": "~4.15.2",
+    "express-session": "^1.15.5",
+    "express-validator": "^4.1.0",
+    "forecast-api": "https://github.com/xavierlacot/node-forecast-api#feature/add-assignment",
+    "harvest": "https://github.com/xavierlacot/node-harvest#fix/ofUser-management",
+    "helmet": "^3.8.1",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "moment-recur": "^1.0.7",
+    "morgan": "~1.8.1",
+    "nightmare": "^2.10.0",
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.4",
+    "reselect": "^3.0.1",
+    "serve-favicon": "~2.4.2",
+    "twig": "~0.10.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}

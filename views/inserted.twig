@@ -1,0 +1,31 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <h1>{{title}}</h1>
+
+    <div class="card">
+        <p>
+            The following assignements have been inserted:
+        </p>
+
+        <h2>In Harvest</h2>
+        <ul>
+            {% for assignement in assignements.harvest %}
+                <li>
+                    {{ assignement.username }}:
+                    <a href="https://{{ harvest_client_domain }}.harvestapp.com/time/day/{{ assignement.url }}">{{ assignement.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h2>In Forecast</h2>
+        <ul>
+            {% for assignement in assignements.forecast %}
+                <li>
+                    {{ assignement.username }}:
+                    <a href="https://forecastapp.com/{{ forecast_account_id }}/schedule/team/{{ assignement.user_id }}/assignments/{{ assignement.id }}/edit?zoomedOut=true">{{ assignement.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

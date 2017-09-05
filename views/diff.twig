@@ -1,0 +1,57 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <p class="buttons">
+        <a href="/diff/{{ prevStart }}/{{ prevEnd }}" class="button">←</a>&nbsp;<a href="/diff/{{ nextStart }}/{{ nextEnd }}" class="button">→</a>
+    </p>
+    <h1>{{title}}</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                {% for day in prettyDays %}
+                    <th class="day">
+                        {{ day.prettyDay }}
+                    </th>
+                {% endfor %}
+            </tr>
+        </thead>
+        {% for user in users %}
+            <tr>
+                <th class="people">
+                    {{ user.first_name ~ ' ' ~ user.last_name }}
+                </th>
+
+                {% for prettyDay in prettyDays %}
+                    {% set day = prettyDay.day %}
+                    <td class="assignement{% if user.diff[day] == 1 %} half-error{% elseif user.diff[day] == 2 %} error{% endif %}{% if prettyDay.isWeekend %} weekend{% endif %}">
+                        <a href="https://{{ harvest_client_domain }}.harvestapp.com/time/week/{{ prettyDay.urlFormatted }}/{{ user.harvest_user_id }}">
+                            &nbsp;
+                        </a>
+                        {% if user.forecastAssignements[day] or user.harvestAssignements[day] %}
+                            <span class="tooltiptext tooltip-bottom">
+                                {% if user.forecastAssignements[day] %}
+                                    {% for assignement in user.forecastAssignements[day] %}
+                                        <i class="forecast"></i> {{ assignement.project.name }} ({{ assignement.allocation }}h)<br />
+                                    {% endfor %}
+                                {% else %}
+                                    <i class="forecast"></i> no data 😓<br />
+                                {% endif %}
+                                {% if user.harvestAssignements[day] %}
+                                    {% for assignement in user.harvestAssignements[day] %}
+                                        <i class="harvest"></i> {{ assignement.project_name }} ({{ assignement.allocation }}h)<br />
+                                    {% endfor %}
+                                {% else %}
+                                    <i class="harvest"></i> no data 😓<br />
+                                {% endif %}
+                            </span>
+                        {% endif %}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
