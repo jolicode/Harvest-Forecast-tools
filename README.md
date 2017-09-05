@@ -3,7 +3,11 @@
 This projects contains several useful additions to [Harvest](https://www.getharvest.com/) and [Forecast](https://www.getharvest.com/forecast), two time tracking and scheduling applications:
 
  * Harvest Timesheets and Forecast schedules comparison at the team scale;
+ * Generate a days-off summary as a markdown list, from both Harvest and Forecast;
  * Mass team insertions of Harvest timesheets and Forecast schedules entries.
+
+⚠️ Forecast APIs are not official, and may break or change from one day to another<br />
+⚠️ This is a Proof Of Concept, far from perfect. Feel free to improve :)
 
 ## Pre-requisites
 
@@ -33,6 +37,8 @@ In its invoicing process, the company can then track mistakes, edit Harvest time
 ### Mass team insertions
 
 It happens several times a year when you want to add the same entry on the same day to all users in Forecast or Harvest (public holidays, conferences, incentive or team building, company-wide project, etc.). Doing so in Forecast and Harvest is a quite long story for now and involves repeating many clicks. This tool allows to mass-insert entries in Harvest timesheets and/or Forecast schedules.
+
+![Harvest Forecast team-wide assignments insertion](./doc/mass-insertion.png)
 
 ### Day-off summary
 
