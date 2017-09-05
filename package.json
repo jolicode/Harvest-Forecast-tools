@@ -1,6 +1,8 @@
 {
   "name": "harvest-forecast-tools",
+  "author": "JoliCode",
   "license": "MIT",
+  "description": "",
   "keywords": [
     "harvest",
     "forecast"
@@ -12,6 +14,7 @@
     "prettier": "prettier --write \"{lib,routes}/**/*.js\"",
     "start": "yarn run babel-node -- ./bin/www"
   },
+  "repository": "https://github.com/jolicode/Harvest-Forecast-tools",
   "dependencies": {
     "append-query": "^2.0.1",
     "babel-cli": "^6.26.0",
