@@ -20,7 +20,7 @@ This projects contains several useful additions to [Harvest](https://www.getharv
 
 ### Timesheets and schedules reconciliation
 
-Validating timesheets using Harvest is a pain, as there's no way to check it against Forecast schedules. The main feature of this tool compares both in a graphical way:
+Validating timesheets using Harvest is a pain, as there's no way to check it against Forecast schedules. The main feature of this tool is to compare both in a graphical way:
 
 ![Harvest Forecast reconciliation](./doc/harvest-forecast-reconciliation.png)
 
