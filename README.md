@@ -73,6 +73,12 @@ Run the dev server using the `yarn run start` command, then head to [http://loca
 
 Run the dev server using the `yarn run dev` command, then head to [http://localhost:3000/](http://localhost:3000/).
 
+You may prettify your code using [prettier](https://prettier.io/) with the command:
+
+```
+$ yarn run prettier
+```
+
 ## Todo
 
  * add a weekly recap of Forecast assignments and send it with Slack or email;

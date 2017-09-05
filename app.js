@@ -1,29 +1,33 @@
-import express from 'express'
-import session from 'express-session'
-import sessionStorage from './lib/storage/session'
-import path from 'path'
-import favicon from 'serve-favicon'
-import helmet from 'helmet'
-import logger from 'morgan'
-import cookieParser from 'cookie-parser'
-import bodyParser from 'body-parser'
+import express from 'express';
+import session from 'express-session';
+import sessionStorage from './lib/storage/session';
+import path from 'path';
+import favicon from 'serve-favicon';
+import helmet from 'helmet';
+import logger from 'morgan';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 const RedisStore = require('connect-redis')(session);
 
 let app = express();
 
 // harden a little our little app
-app.use(helmet({
-  noCache: true,
-  referrerPolicy: true,
-}));
+app.use(
+  helmet({
+    noCache: true,
+    referrerPolicy: true,
+  })
+);
 
 // setup the session
-app.use(session({
-  store: new RedisStore(),
-  secret: 'pacific ☮️ unicorn 🦄',
-  resave: false,
-  saveUninitialized: true
-}));
+app.use(
+  session({
+    store: new RedisStore(),
+    secret: 'pacific ☮️ unicorn 🦄',
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 app.use(sessionStorage('storage'));
 
 // view engine setup
