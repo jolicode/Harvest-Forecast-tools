@@ -69,16 +69,19 @@ router.get(['/', '/:start/:end'], (req, res, next) => {
   const harvestFetcher = new HarvestFetcher(
     req.storage,
     req.session.harvest.account_id,
-    req.session.token,
+    req.session.token
   );
   const forecastFetcher = new ForecastFetcher(
     req.storage,
     req.session.forecast.account_id,
-    req.session.token,
+    req.session.token
   );
 
   Promise.all([
-    harvestFetcher.getData(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD')),
+    harvestFetcher.getData(
+      start.format('YYYY-MM-DD'),
+      end.format('YYYY-MM-DD')
+    ),
     forecastFetcher.getData(start.toDate(), end.toDate()),
   ])
     .then(values => {

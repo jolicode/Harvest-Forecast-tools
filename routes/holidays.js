@@ -54,7 +54,7 @@ router.get(['/', '/:start/:end'], (req, res, next) => {
   let harvestFetcher = new HarvestFetcher(
     req.storage,
     req.session.harvest.account_id,
-    req.session.token,
+    req.session.token
   );
   let forecastFetcher = new ForecastFetcher(
     req.storage,

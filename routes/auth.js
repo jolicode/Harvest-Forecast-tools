@@ -9,8 +9,7 @@ router.get('/code', (req, res, next) => {
 
   rp({
     method: 'POST',
-    uri:
-      'https://id.getharvest.com/api/v1/oauth2/token',
+    uri: 'https://id.getharvest.com/api/v1/oauth2/token',
     form: {
       code: code,
       client_id: process.env.harvest_id_client_id,
@@ -46,8 +45,7 @@ router.get('/code', (req, res, next) => {
           'Harvest-Account-Id': harvestAccountId,
           'User-Agent': 'Harvest Forecast Tools/1.0',
         },
-      })
-      .then(companyBody => {
+      }).then(companyBody => {
         const parsedCompanyBody = JSON.parse(companyBody);
         req.session.harvest = {
           account_id: harvestAccountId,
@@ -91,8 +89,8 @@ function getAccountId(scope, type) {
     return null;
   }
 
-  _.each(scopes, (scope) => {
-    if (matches = scope.match(regex)) {
+  _.each(scopes, scope => {
+    if ((matches = scope.match(regex))) {
       accountId = matches[1];
     }
   });
