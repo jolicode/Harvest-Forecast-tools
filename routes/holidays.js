@@ -9,10 +9,7 @@ const router = express.Router();
 router.get(['/', '/:start/:end'], (req, res, next) => {
   let start, end;
 
-  if (
-    !_.has(req, 'session.harvest.token') ||
-    !_.has(req, 'session.forecast.token')
-  ) {
+  if (!_.has(req, 'session.token')) {
     return res.redirect('/');
   }
 
@@ -56,13 +53,13 @@ router.get(['/', '/:start/:end'], (req, res, next) => {
 
   let harvestFetcher = new HarvestFetcher(
     req.storage,
-    process.env.harvest_client_domain,
-    req.session.harvest.token
+    req.session.harvest.account_id,
+    req.session.token,
   );
   let forecastFetcher = new ForecastFetcher(
     req.storage,
-    process.env.forecast_account_id,
-    req.session.forecast.token
+    req.session.forecast.account_id,
+    req.session.token
   );
 
   Promise.all([

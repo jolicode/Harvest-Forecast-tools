@@ -45,8 +45,7 @@ app.use(cookieParser());
 
 // mount our main routes
 app.use('/', require('./routes/index'));
-app.use('/auth/forecast', require('./routes/forecast'));
-app.use('/auth/harvest', require('./routes/harvest'));
+app.use('/auth', require('./routes/auth'));
 app.use('/diff', require('./routes/diff'));
 app.use('/holidays', require('./routes/holidays'));
 app.use('/insert', require('./routes/insert'));

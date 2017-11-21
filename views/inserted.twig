@@ -13,7 +13,7 @@
             {% for assignement in assignements.harvest %}
                 <li>
                     {{ assignement.username }}:
-                    <a href="https://{{ harvest_client_domain }}.harvestapp.com/time/day/{{ assignement.url }}">{{ assignement.name }}</a>
+                    <a href="{{ harvest_base_uri }}/time/day/{{ assignement.url }}">{{ assignement.name }}</a>
                 </li>
             {% endfor %}
         </ul>

@@ -9,13 +9,6 @@ This projects contains several useful additions to [Harvest](https://www.getharv
 ⚠️ Forecast APIs are not official, and may break or change from one day to another<br />
 ⚠️ This is a Proof Of Concept, far from perfect. Feel free to improve :)
 
-## Pre-requisites
-
- * nodejs
- * redis
- * yarn
- * run `yarn install`
-
 ## Features
 
 ### Timesheets and schedules reconciliation
@@ -44,6 +37,13 @@ It happens several times a year when you want to add the same entry on the same 
 
 This feature generates a "day off summary" for a given period, in markdown format.
 
+## Pre-requisites
+
+ * nodejs
+ * redis
+ * yarn
+ * run `yarn install`
+
 ## Configure
 
 Copy and edit the `.env` configuration file:
@@ -54,14 +54,10 @@ $ cp .env.dist .env
 
 Edit the configuration options:
 
- * `forecast_username`: your forecast email address, eg. `forecast_username=some-email@example.com`
- * `forecast_password`: your forecast password eg. `forecast_password=some-password`
- * `forecast_account_id`: your forecast account id (found in your forecast url, https://forecastapp.com/`[FORECAST_ID]`/schedule/team) eg. `forecast_account_id=1234`
+ * `harvest_id_client_id`: the `Client ID` of your OAuth client (create it at https://id.getharvest.com/oauth2/clients/new), eg. `harvest_id_client_id=your-oauth-client-id`
+ * `harvest_id_client_secret`: the `Client Secret` of your OAuth client (create it at https://id.getharvest.com/oauth2/clients/new), eg. `harvest_id_client_secret=your-oauth-client-secret`
+ * `harvest_id_client_redirect_uri`: the OAuth redirect URI, eg. `harvest_id_client_redirect_uri=http://localhost:3000/auth/code`
  * `forecast_insert_default_project_id`: id of the default project to use in the mass-insertion form. For instance, set it to a public holidays project, if you have one. eg. `forecast_insert_default_project_id=12345`
- * `harvest_client_domain`: your harvest subdomain (as found in your harvest url, https://[HARVEST_SUBDOMAIN].harvestapp.com/), eg. `harvest_client_domain=some-subdomain`
- * `harvest_client_id`: the `Client ID` of your OAuth client (create it at https://www.harvestapp.com/oauth2_clients), eg. `harvest_client_id=your-oauth-client-id`
- * `harvest_client_secret`: the `Client Secret` of your OAuth client (create it at https://www.harvestapp.com/oauth2_clients), eg. `harvest_client_secret=your-oauth-client-secret`
- * `harvest_client_redirect_uri`: the OAuth redirect URI, eg. `harvest_client_redirect_uri=http://localhost:3000/auth/harvest/code`
  * `harvest_holiday_projects`: a comma-separated list of project ids which may appear in the holidays summary page, eg. `harvest_holiday_projects=comma-separated-project-ids`
  * `harvest_nonreconciliable_client_ids`: a comma-separated list of clients ids that do not trigger the half-reconciliation, eg. `harvest_nonreconciliable_client_ids=a-comma-separated-list-of-harvest-client-ids`
 
@@ -82,6 +78,4 @@ $ yarn run prettier
 ## Todo
 
  * add a weekly recap of Forecast assignments and send it with Slack or email;
- * make the app configurable, with support for several accounts;
  * add a Slack-bot to access the various features;
- * switch forecast auth to OAuth, once a public API will be available.

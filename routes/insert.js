@@ -14,8 +14,8 @@ const router = express.Router();
 const buildForm = (req, res, next, values = {}, errors = {}) => {
   let forecastFetcher = new ForecastFetcher(
     req.storage,
-    process.env.forecast_account_id,
-    req.session.forecast.token
+    req.session.forecast.account_id,
+    req.session.token
   );
   Promise.all([
     forecastFetcher.getClients(),
@@ -99,8 +99,8 @@ const getValidators = () => {
         return new Promise((resolve, reject) => {
           const forecastFetcher = new ForecastFetcher(
             req.storage,
-            process.env.forecast_account_id,
-            req.session.forecast.token
+            req.session.forecast.account_id,
+            req.session.token
           );
           forecastFetcher.getPeople().then(data => {
             let userIds = _.reduce(
@@ -136,8 +136,8 @@ const getValidators = () => {
             // assignment for the same day, user and project
             const forecastFetcher = new ForecastFetcher(
               req.storage,
-              process.env.forecast_account_id,
-              req.session.forecast.token
+              req.session.forecast.account_id,
+              req.session.token
             );
             let date = moment(values.date, 'MM/DD/YYYY').format('YYYY-MM-DD');
             forecastFetcher.getAssignements(date, date).then(assignments => {
@@ -178,13 +178,13 @@ router.post('/', getValidators(), (req, res, next) => {
     const values = matchedData(req, { onlyValidData: true });
     const forecastFetcher = new ForecastFetcher(
       req.storage,
-      process.env.forecast_account_id,
-      req.session.forecast.token
+      req.session.forecast.account_id,
+      req.session.token
     );
     const harvestFetcher = new HarvestFetcher(
       req.storage,
-      process.env.harvest_client_domain,
-      req.session.harvest.token
+      req.session.harvest.account_id,
+      req.session.token
     );
 
     Promise.all([
@@ -220,20 +220,20 @@ router.post('/', getValidators(), (req, res, next) => {
           .getTasksByProjectId(projectId)
           .then(tasks => {
             if (_.get(values.in, 'harvest', false)) {
-              if (!_.has(tasks, [0, 'task_assignment', 'task_id'])) {
+              if (!_.has(tasks, [0, 'task', 'id'])) {
                 throw 'no task found for this project';
               }
 
-              let taskId = tasks[0].task_assignment.task_id;
+              let taskId = tasks[0].task.id;
               _.each(data[0], user => {
                 addPromises.push(
                   harvestFetcher.addDaily({
                     notes: values.comment,
                     hours: values.duration,
                     project_id: projectId,
-                    of_user: user.harvest_user_id,
+                    user_id: user.harvest_user_id,
                     task_id: taskId,
-                    spent_at: date,
+                    spent_date: date,
                   })
                 );
               });
@@ -244,26 +244,23 @@ router.post('/', getValidators(), (req, res, next) => {
               .then(insertions => {
                 let assignements = { forecast: [], harvest: [] };
                 _.each(insertions, insertion => {
-                  if (_.has(insertion, 'task_id')) {
+                  if (_.has(insertion, ['task', 'id'])) {
                     // this is an harvest assignement
-                    let user = _.find(data[0], {
-                      harvest_user_id: insertion.user_id,
-                    });
                     assignements.harvest.push({
-                      username: user.first_name + ' ' + user.last_name,
+                      username: insertion.user.name,
                       name:
-                        insertion.client +
+                        insertion.client.name +
                         ' - ' +
-                        insertion.project +
+                        insertion.project.name +
                         ' (' +
-                        insertion.task +
+                        insertion.task.name +
                         ')',
                       url:
-                        moment(insertion.spent_at, 'YYYY-MM-DD').format(
+                        moment(insertion.spent_date, 'YYYY-MM-DD').format(
                           'YYYY/MM/DD'
                         ) +
                         '/' +
-                        user.harvest_user_id,
+                        insertion.user.id,
                     });
                   } else {
                     // this is a forecast assignement
@@ -284,8 +281,8 @@ router.post('/', getValidators(), (req, res, next) => {
                 return res.render('inserted', {
                   title:
                     'Mass insert entries in forecast schedules &amp; Harvest timesheets',
-                  forecast_account_id: process.env.forecast_account_id,
-                  harvest_client_domain: process.env.harvest_client_domain,
+                  forecast_account_id: req.session.forecast.account_id,
+                  harvest_base_uri: req.session.harvest.base_uri,
                   assignements,
                 });
               })

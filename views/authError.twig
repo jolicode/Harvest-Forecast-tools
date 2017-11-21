@@ -1,0 +1,15 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <div class="homepage">
+        <h1>{{title}}</h1>
+        <div class="notice error">
+            Please choose exactly one Harvest and one Forecast account on the Harvest authorization screen.<br />
+            (You must click the "choose specific accounts" link and manually select the accounts).
+
+            <p>
+                🔓&nbsp;&nbsp;<a href="/auth/redirect" class="button">Authorize Harvest and Forecast again</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

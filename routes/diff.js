@@ -9,10 +9,7 @@ const router = express.Router();
 router.get(['/', '/:start/:end'], (req, res, next) => {
   let start, end;
 
-  if (
-    !_.has(req, 'session.harvest.token') ||
-    !_.has(req, 'session.forecast.token')
-  ) {
+  if (!_.has(req, 'session.token')) {
     return res.redirect('/');
   }
 
@@ -71,21 +68,22 @@ router.get(['/', '/:start/:end'], (req, res, next) => {
 
   const harvestFetcher = new HarvestFetcher(
     req.storage,
-    process.env.harvest_client_domain,
-    req.session.harvest.token
+    req.session.harvest.account_id,
+    req.session.token,
   );
   const forecastFetcher = new ForecastFetcher(
     req.storage,
-    process.env.forecast_account_id,
-    req.session.forecast.token
+    req.session.forecast.account_id,
+    req.session.token,
   );
 
   Promise.all([
-    harvestFetcher.getData(start.toDate(), end.toDate()),
+    harvestFetcher.getData(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD')),
     forecastFetcher.getData(start.toDate(), end.toDate()),
   ])
     .then(values => {
       res.render('diff', {
+        harvest_base_uri: req.session.harvest.base_uri,
         title:
           'Harvest / Forecast diff (' +
           start.format('YYYY-MM-DD') +

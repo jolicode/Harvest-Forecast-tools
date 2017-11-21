@@ -154,6 +154,16 @@ input.button:hover {
   background-color: #fff4cc;
 }
 
+.notice {
+  border-left: 10px #cc0000 solid;
+  padding: 2em;
+}
+
+.notice p {
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+
 .assignement a {
   display: inline-block;
   height: 100%;

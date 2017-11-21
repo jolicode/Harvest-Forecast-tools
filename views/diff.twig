@@ -28,7 +28,7 @@
                 {% for prettyDay in prettyDays %}
                     {% set day = prettyDay.day %}
                     <td class="assignement{% if user.diff[day] == 1 %} half-error{% elseif user.diff[day] == 2 %} error{% endif %}{% if prettyDay.isWeekend %} weekend{% endif %}">
-                        <a href="https://{{ harvest_client_domain }}.harvestapp.com/time/week/{{ prettyDay.urlFormatted }}/{{ user.harvest_user_id }}">
+                        <a href="{{ harvest_base_uri }}/time/week/{{ prettyDay.urlFormatted }}/{{ user.harvest_user_id }}">
                             &nbsp;
                         </a>
                         {% if user.forecastAssignements[day] or user.harvestAssignements[day] %}
