@@ -1,3 +1,5 @@
+This project is deprecated. See https://github.com/jolicode/forecast-tools for an alternative.
+
 # Harvest Forecast tools
 
 This projects contains several useful additions to [Harvest](https://www.getharvest.com/) and [Forecast](https://www.getharvest.com/forecast), two time tracking and scheduling applications:
